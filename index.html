@@ -52,6 +52,19 @@
         a {
             color: #00b0ff;
         }
+        .order-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .order-list li {
+            background: #333;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .order-list li h3 {
+            margin: 0 0 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -84,6 +97,13 @@
         </ul>
     </div>
 
+    <div class="card">
+        <h2>Недавние заказы</h2>
+        <ul id="order-list" class="order-list">
+            <!-- Заказы будут загружаться сюда -->
+        </ul>
+    </div>
+
     <div class="card" style="text-align:center;">
         <h2>Заказать дизайн</h2>
         <p>Свяжитесь со мной через Telegram и мы обсудим все детали вашего проекта:</p>
@@ -94,6 +114,35 @@
 <footer>
     © 2025. Все права защищены. Логотипы и Аватарки на Заказ.
 </footer>
+
+<script>
+// Загрузка заказов из orders.json
+fetch('orders.json')
+    .then(response => response.json())
+    .then(data => {
+        const orderList = document.getElementById('order-list');
+        
+        // Если заказы есть, выводим их на страницу
+        if (data.orders && data.orders.length > 0) {
+            data.orders.forEach(order => {
+                const orderItem = document.createElement('li');
+                orderItem.innerHTML = `
+                    <h3>Заказ №${order.id}</h3>
+                    <p><strong>Клиент:</strong> ${order.clientName}</p>
+                    <p><strong>Услуга:</strong> ${order.service}</p>
+                    <p><strong>Дата:</strong> ${order.date}</p>
+                    <p><strong>Статус:</strong> ${order.status}</p>
+                `;
+                orderList.appendChild(orderItem);
+            });
+        } else {
+            orderList.innerHTML = '<li>Нет заказов</li>';
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка при загрузке данных заказов:', error);
+    });
+</script>
 
 </body>
 </html>
