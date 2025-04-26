@@ -1,0 +1,18 @@
+{
+    "orders": [
+        {
+            "id": 1,
+            "clientName": "XeRiKo",
+            "service": "Логотип для сайта",
+            "date": "2025-04-25",
+            "status": "Завершён"
+        },
+        {
+            "id": 2,
+            "clientName": "Kiz3r0",
+            "service": "Аватарка для соцсетей",
+            "date": "2025-04-24",
+            "status": "Завершен"
+        }
+    ]
+}
